@@ -1,9 +1,0 @@
-*.js
-*.png
-*.eot
-*.ttf
-*.woff
-
-/src/assets/fonts/
-/dist/
-/public/

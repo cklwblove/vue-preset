@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "ES6",
+    "lib": ["dom", "es2017"],
+    "moduleResolution": "Node",
+    "noImplicitAny": false,
+    "jsx": "react",
+    "outDir": "dist",
+    "rootDir": ".",
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./src",
+    "paths": {
+      "~/*": ["./*"],
+      "@core/*": ["../node_modules/@ovine/core/lib/*"]
+    }
+  },
+  "include": ["./src", "./typings"],
+  "exclude": ["node_modules", "__tests__", "lib"]
+}

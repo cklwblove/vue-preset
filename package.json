@@ -1,16 +1,66 @@
 {
-  "name": "vue-preset",
-  "version": "1.1.0",
-  "description": "结合 vue-cli3 的 preset 搭建基于 git repo 的前端项目模板",
-  "main": "./generator/index.js",
-  "directories": {
-    "doc": "docs"
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "website/*"
+    ]
   },
+  "keywords": [
+    "cli",
+    "cloud",
+    "react",
+    "typescript",
+    "vue-template",
+    "vue3-template",
+    "vite-template"
+  ],
+  "license": "MIT",
   "scripts": {
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs",
-    "deploy": "bash ./docs/deploy.sh",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepare:dev": "node-sass -v && yarn tsc && cd ./website/example && yarn scss && yarn dev:lib",
+    "dev:cli": "cd ./packages/cli && yarn dev",
+    "dev:core": "cd ./packages/core && yarn dev",
+    "changelog": "lerna-changelog",
+    "pretty": "prettier --loglevel warn --write --config .prettierrc \"**/*.{md,yml,json,yaml,css,vue}\"",
+    "eslint": "eslint --cache --fix \"**/*.{js,jsx,ts,tsx}\"",
+    "lerna": "lerna",
+    "tsc": "lerna run tsc --no-private && lerna run tsc:editor",
+    "gen:init:env": "yarn workspace @ovine/init gen:env",
+    "version:prerelease": "yarn lerna version prerelease --no-git-tag-version --no-push",
+    "version:patch": "yarn lerna version patch",
+    "publish:stage": "yarn tsc && yarn gen:init:env",
+    "publish:npm": "yarn publish:stage && yarn lerna publish from-package"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-runtime": "^7.8.3",
+    "@babel/preset-typescript": "^7.8.3",
+    "@types/express": "^4.17.2",
+    "@types/fs-extra": "^8.0.1",
+    "@types/inquirer": "^6.5.0",
+    "@types/lodash": "^4.14.149",
+    "@types/node": "^12.12.14",
+    "@types/semver": "^6.2.0",
+    "@types/shelljs": "^0.8.6",
+    "@types/webpack": "^4.41.0",
+    "@types/webpack-dev-server": "^3.9.0",
+    "@types/webpack-merge": "^4.1.5",
+    "@typescript-eslint/eslint-plugin": "~4.10.0",
+    "@typescript-eslint/parser": "~4.10.0",
+    "cross-var": "^1.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "husky": "^4.2.3",
+    "lerna": "^3.20.2",
+    "lerna-changelog": "^1.0.0",
+    "lint-staged": "^10.0.7",
+    "prettier": "^1.19.1",
+    "rimraf": "^3.0.2",
+    "typescript": "~4.1.2",
+    "typescript-transform-paths": "^1.1.14"
   },
   "husky": {
     "hooks": {
@@ -18,30 +68,10 @@
     }
   },
   "lint-staged": {
-    "*.md": "prettier --write",
-    "*.{js,vue,less,css,ts,tsx}": "prettier --write"
+    "*.{json,md}": "yarn pretty",
+    "*.{js,jsx,ts,tsx}": "yarn eslint"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cklwblove/vue-preset.git"
-  },
-  "keywords": [
-    "vue-cli4",
-    "vue2",
-    "vue3",
-    "preset"
-  ],
-  "author": "liwb",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/cklwblove/vue-preset/issues"
-  },
-  "homepage": "https://github.com/cklwblove/vue-preset#readme",
-  "devDependencies": {
-    "@vue/eslint-config-prettier": "^6.0.0",
-    "husky": "^4.3.7",
-    "lint-staged": "^10.5.3",
-    "prettier": "^2.2.1",
-    "vuepress": "^0.14.8"
+  "engines": {
+    "node": ">=10.9.0"
   }
 }

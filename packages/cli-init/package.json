@@ -1,0 +1,50 @@
+{
+  "name": "@winner-fed/cli-init",
+  "version": "0.0.1",
+  "description": "Apply cloud cli template more easily.",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cloud-templates/cloud-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cloud-templates/cloud-cli/issues"
+  },
+  "author": "winner-fed",
+  "license": "MIT",
+  "bin": {
+    "ovine-init": "bin/index.js"
+  },
+  "keywords": [
+    "cloud",
+    "winner",
+    "vue",
+    "typescript",
+    "vue-template",
+    "vite-template"
+  ],
+  "scripts": {
+    "tsc": "rimraf ./lib && tsc",
+    "dev": "tsc -w",
+    "clean": "rimraf ./lib",
+    "clean:tmp": "rimraf ./tmp/*",
+    "cli": "node ../cli/bin/index.js",
+    "gen:env": "rimraf ./env/.ovine && yarn cli dll --no-hash env && yarn cli scss env && node ./post_gen_env.js"
+  },
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "commander": "^4.0.1",
+    "figlet": "^1.3.0",
+    "fs-extra": "^8.1.0",
+    "inquirer": "^7.0.0",
+    "ora": "^4.0.3",
+    "semver": "^6.3.0",
+    "shelljs": "^0.8.3"
+  },
+  "engines": {
+    "node": ">=10.9.0"
+  }
+}

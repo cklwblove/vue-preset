@@ -1,7 +1,0 @@
-/build/
-/dist/
-node_modules
-/public/
-RESTFULURL.js
-vue.config.js
-src/assets/
